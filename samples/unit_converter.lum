@@ -1,0 +1,34 @@
+// ============================================
+// Lumina Practical Utility: Universal Unit Converter
+// Temperature, Distance, Weight & File Size Calculations
+// ============================================
+
+banao c_to_f(celsius) {
+    lautao (celsius * 9 / 5) + 32
+}
+
+banao km_to_miles(km) {
+    lautao km * 0.621371
+}
+
+banao kg_to_lbs(kg) {
+    lautao kg * 2.20462
+}
+
+bolo "========================================="
+bolo "       EVERYDAY UNIT CONVERSIONS         "
+bolo "========================================="
+
+rakho room_temp_c = 24
+rakho room_temp_f = c_to_f(room_temp_c)
+bolo "Temperature : ", room_temp_c, "C -> ", room_temp_f, "F"
+
+rakho marathon_km = 42.195
+rakho marathon_miles = km_to_miles(marathon_km)
+bolo "Distance    : ", marathon_km, "km -> ", marathon_miles, "miles"
+
+rakho weight_kg = 75
+rakho weight_lbs = kg_to_lbs(weight_kg)
+bolo "Weight      : ", weight_kg, "kg -> ", weight_lbs, "lbs"
+
+bolo "========================================="

@@ -1,0 +1,7 @@
+// Simple calculator REPL-like script (Hindi keywords)
+rakho x = 7
+rakho y = 5
+bolo "x+y=", x + y
+bolo "x-y=", x - y
+bolo "x*y=", x * y
+bolo "x/y=", x / y

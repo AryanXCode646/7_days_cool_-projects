@@ -1,0 +1,21 @@
+// Natural-language Lumina sample (Hindi keywords transliterated)
+// Hello World
+bolo "Hello from Lumina!"
+
+// Calculator example (Hindi keywords)
+rakho a = 10
+rakho b = 3
+bolo "a + b =", a + b
+bolo "a * b =", a * b
+
+// Loop and shreni (har/mein)
+har i mein shreni(5) {
+    bolo "i:", i
+}
+
+// Function using 'banao'
+banao add(x, y) {
+    lautao x + y
+}
+
+bolo "add(2,3)", add(2,3)

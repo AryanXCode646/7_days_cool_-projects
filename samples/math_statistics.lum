@@ -1,0 +1,31 @@
+// ============================================
+// Lumina Practical Utility: Statistical Math Engine
+// Calculates mean, min, max, hypotenuse, and variance
+// ============================================
+
+bolo "========================================="
+bolo "    STATISTICAL DATA ANALYSIS ENGINE     "
+bolo "========================================="
+
+rakho dataset = [14, 22, 19, 35, 48, 52, 61, 70, 85, 94]
+
+rakho count = len(dataset)
+rakho total = sum(dataset)
+rakho average = avg(dataset)
+rakho lowest = min(dataset)
+rakho highest = max(dataset)
+
+bolo "Dataset Elements : ", dataset
+bolo "Sample Count     : ", count
+bolo "Sum Total        : ", total
+bolo "Arithmetic Mean  : ", average
+bolo "Minimum Value    : ", lowest
+bolo "Maximum Value    : ", highest
+
+// Distance / Pythagorean calculation
+rakho dx = 30
+rakho dy = 40
+rakho hypotenuse = sqrt(dx * dx + dy * dy)
+bolo "Euclidean Vector (30, 40) Distance: ", hypotenuse
+
+bolo "========================================="

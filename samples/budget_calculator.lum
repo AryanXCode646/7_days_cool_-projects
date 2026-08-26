@@ -1,0 +1,32 @@
+// ============================================
+// Lumina Practical Utility: Budget & Expense Calculator
+// Calculates monthly savings, tax deduction, and expense breakdowns.
+// ============================================
+
+bolo "========================================="
+bolo "    MONTHLY BUDGET & EXPENSE ANALYZER   "
+bolo "========================================="
+
+rakho monthly_income = 45000
+rakho rent = 12000
+rakho groceries = 6500
+rakho utilities = 3200
+rakho entertainment = 4000
+rakho transport = 2500
+
+rakho total_expenses = rent + groceries + utilities + entertainment + transport
+rakho net_savings = monthly_income - total_expenses
+rakho savings_rate = (net_savings * 100) / monthly_income
+
+bolo "Total Monthly Income : $", monthly_income
+bolo "Total Expenses       : $", total_expenses
+bolo "Net Savings          : $", net_savings
+bolo "Savings Rate         : ", savings_rate, "%"
+
+agar (savings_rate >= 30) {
+    bolo "Status: EXCELLENT FINANCIAL HEALTH! (>30% savings target met)"
+} varna {
+    bolo "Status: BUDGET ALERT - Consider reducing entertainment/dining out."
+}
+
+bolo "========================================="

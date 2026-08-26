@@ -1,0 +1,21 @@
+// Number guessing game (Hindi keywords)
+rakho secret = 7
+bolo "Guess a number between 0 and 10"
+banao attempt() {
+    rakho s = pooch "> "
+    rakho n = purn(s)
+    agar n == secret {
+        bolo "You win!"
+        lautao haan
+    } varna {
+        bolo "Try again"
+        lautao nahin
+    }
+}
+
+rakho done = nahin
+jabtak !done {
+    agar attempt() {
+        rakho done = haan
+    }
+}
