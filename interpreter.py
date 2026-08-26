@@ -91,25 +91,38 @@ class Interpreter:
         self.globals.define('split', lambda s, sep=' ': s.split(sep))
         self.globals.define('join', lambda sep, lst: sep.join(str(x) for x in lst))
 
-        # File I/O for practical scripts & automation
+        # Security Sandboxed File I/O (Prevents Path Traversal & Unauthorized Access)
+        def _sanitize_safe_path(path):
+            base_dir = os.path.abspath(os.getcwd())
+            resolved = os.path.abspath(os.path.join(base_dir, str(path)))
+            if not resolved.startswith(base_dir):
+                raise PermissionError(f"Security Sandbox Violation: Access denied outside workspace ({path})")
+            basename = os.path.basename(resolved).lower()
+            if basename in ('.env', '.env.local', 'credentials.json', 'id_rsa', 'id_ed25519', 'sam', 'system'):
+                raise PermissionError(f"Security Sandbox Violation: Access denied to sensitive target ({basename})")
+            return resolved
+
         def _read_file(path):
-            with open(path, 'r', encoding='utf-8') as f:
+            safe_path = _sanitize_safe_path(path)
+            with open(safe_path, 'r', encoding='utf-8') as f:
                 return f.read()
 
         def _write_file(path, content):
-            with open(path, 'w', encoding='utf-8') as f:
+            safe_path = _sanitize_safe_path(path)
+            with open(safe_path, 'w', encoding='utf-8') as f:
                 f.write(str(content))
             return True
 
         def _append_file(path, content):
-            with open(path, 'a', encoding='utf-8') as f:
+            safe_path = _sanitize_safe_path(path)
+            with open(safe_path, 'a', encoding='utf-8') as f:
                 f.write(str(content) + '\n')
             return True
 
         self.globals.define('read_file', _read_file)
         self.globals.define('write_file', _write_file)
         self.globals.define('append_file', _append_file)
-        self.globals.define('list_files', lambda path='.': os.listdir(path))
+        self.globals.define('list_files', lambda path='.': [f for f in os.listdir(_sanitize_safe_path(path)) if not f.startswith('.')])
 
         # Time & Sleep
         self.globals.define('now', lambda: time.strftime('%Y-%m-%d %H:%M:%S'))
