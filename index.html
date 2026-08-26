@@ -47,22 +47,92 @@
     <h1>Everyday Utility & Cool Desktop Tools</h1>
     <p>A collection of touchless computer vision apps, generative art studios, music learning tools, developer typing trainers, and lightweight desktop automation built with Python.</p>
     <div class="hero-actions">
-      <a href="#apps" class="btn-primary">Explore All 10 Apps →</a>
-      <a href="#quickstart" class="btn-secondary">Quick Setup Guide</a>
+      <a href="#studio" class="btn-primary">⚡ Try Live In-Browser Studio →</a>
+      <a href="#apps" class="btn-secondary">Browse All 10 Apps</a>
     </div>
   </section>
 
-  <!-- Apps Grid -->
+  <!-- Interactive In-Browser Studio Hub -->
+  <section class="studio-section" id="studio">
+    <div class="section-header">
+      <h2>⚡ Live In-Browser App Studio</h2>
+      <p>Interact with web-synthesized versions of the suite apps right here in your browser.</p>
+    </div>
+
+    <div class="studio-card">
+      <div class="studio-tabs">
+        <button class="tab-btn active" data-tab="tab-breath" onclick="switchStudioTab('tab-breath')">🧘 4-7-8 Mindful Breathing</button>
+        <button class="tab-btn" data-tab="tab-piano" onclick="switchStudioTab('tab-piano')">🎹 Web Synthesizer Piano</button>
+        <button class="tab-btn" data-tab="tab-swarm" onclick="switchStudioTab('tab-swarm')">🐜 Swarm AI Simulator</button>
+        <button class="tab-btn" data-tab="tab-art" onclick="switchStudioTab('tab-art')">🎨 Wallpaper Art Generator</button>
+      </div>
+
+      <!-- Tab: Breathing Pacer -->
+      <div class="tab-panel active" id="tab-breath">
+        <div class="breathing-box">
+          <div class="breath-circle" id="studioBreathCircle">
+            <span style="font-size: 2.2rem;">🧘</span>
+          </div>
+          <div class="breath-instruction" id="studioBreathText">INHALE DEEP</div>
+          <div class="breath-timer" id="studioBreathTimer">4s</div>
+          <p style="margin-top: 16px; color: var(--text-muted); font-size: 0.9rem;">Clinical 4-7-8 stress-reduction rhythm for desk breaks.</p>
+        </div>
+      </div>
+
+      <!-- Tab: Piano -->
+      <div class="tab-panel" id="tab-piano">
+        <div style="text-align: center; margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem;">
+          Press keyboard keys <strong>[A, S, D, F, G, H, J, K]</strong> or <strong>[W, E, T, Y, U]</strong> for sharps.
+        </div>
+        <canvas id="studioPianoCanvas" class="demo-canvas" style="height: 180px;"></canvas>
+      </div>
+
+      <!-- Tab: Swarm -->
+      <div class="tab-panel" id="tab-swarm">
+        <div style="text-align: center; margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem;">
+          Click anywhere on the simulation canvas to spawn fresh food caches!
+        </div>
+        <canvas id="studioSwarmCanvas" class="demo-canvas" style="height: 300px;"></canvas>
+      </div>
+
+      <!-- Tab: Art Generator -->
+      <div class="tab-panel" id="tab-art">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Generative mathematical vector artwork.</span>
+          <button class="btn-primary" onclick="generateStudioArt()" style="padding: 8px 16px; font-size: 0.85rem;">Generate New Art</button>
+        </div>
+        <canvas id="studioArtCanvas" class="demo-canvas" style="height: 320px;"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apps Grid with Search & Filters -->
   <section class="section-container" id="apps">
     <div class="section-header">
       <h2>Applications Directory</h2>
-      <p>Click on any application card below for interactive guides, screenshots, and live previews.</p>
+      <p>Explore source code, interactive documentation, and keyboard commands for every application.</p>
+    </div>
+
+    <!-- Live Controls: Search & Category Chips -->
+    <div class="controls-bar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" placeholder="Search apps by keyword, shortcut, or tech..." oninput="searchApps(this.value)">
+      </div>
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="filterApps('all', this)">All Apps (10)</button>
+        <button class="filter-btn" onclick="filterApps('cv', this)">Vision & Gestures</button>
+        <button class="filter-btn" onclick="filterApps('audio', this)">Audio & Music</button>
+        <button class="filter-btn" onclick="filterApps('productivity', this)">Productivity</button>
+        <button class="filter-btn" onclick="filterApps('art', this)">Generative Art</button>
+        <button class="filter-btn" onclick="filterApps('language', this)">Language</button>
+      </div>
     </div>
 
     <div class="apps-grid">
 
       <!-- Day 1 -->
-      <div class="app-card" style="--card-accent: #00f0dc;">
+      <div class="app-card" data-category="art productivity" style="--card-accent: #00f0dc;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 01</span>
@@ -83,7 +153,7 @@
       </div>
 
       <!-- Day 2 -->
-      <div class="app-card" style="--card-accent: #10b981;">
+      <div class="app-card" data-category="art productivity" style="--card-accent: #10b981;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 02</span>
@@ -104,7 +174,7 @@
       </div>
 
       <!-- Day 3 -->
-      <div class="app-card" style="--card-accent: #f59e0b;">
+      <div class="app-card" data-category="art" style="--card-accent: #f59e0b;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 03</span>
@@ -125,7 +195,7 @@
       </div>
 
       <!-- Day 4 -->
-      <div class="app-card" style="--card-accent: #a855f7;">
+      <div class="app-card" data-category="cv productivity" style="--card-accent: #a855f7;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 04</span>
@@ -146,7 +216,7 @@
       </div>
 
       <!-- Day 5 -->
-      <div class="app-card" style="--card-accent: #3b82f6;">
+      <div class="app-card" data-category="cv productivity" style="--card-accent: #3b82f6;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 05</span>
@@ -167,7 +237,7 @@
       </div>
 
       <!-- Day 6 -->
-      <div class="app-card" style="--card-accent: #f43f5e;">
+      <div class="app-card" data-category="cv audio" style="--card-accent: #f43f5e;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 06</span>
@@ -188,7 +258,7 @@
       </div>
 
       <!-- Day 7 -->
-      <div class="app-card" style="--card-accent: #38bdf8;">
+      <div class="app-card" data-category="audio cv productivity" style="--card-accent: #38bdf8;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 07</span>
@@ -209,7 +279,7 @@
       </div>
 
       <!-- Day 7_2 -->
-      <div class="app-card" style="--card-accent: #fbbf24;">
+      <div class="app-card" data-category="audio" style="--card-accent: #fbbf24;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 07_2</span>
@@ -230,7 +300,7 @@
       </div>
 
       <!-- Day 7_3 -->
-      <div class="app-card" style="--card-accent: #ec4899;">
+      <div class="app-card" data-category="productivity" style="--card-accent: #ec4899;">
         <div>
           <div class="card-top">
             <span class="day-badge">DAY 07_3</span>
@@ -251,7 +321,7 @@
       </div>
 
       <!-- Root Lumina -->
-      <div class="app-card" style="--card-accent: #6366f1;">
+      <div class="app-card" data-category="language productivity" style="--card-accent: #6366f1;">
         <div>
           <div class="card-top">
             <span class="day-badge">LUMINA</span>
