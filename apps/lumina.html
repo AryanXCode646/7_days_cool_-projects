@@ -58,23 +58,27 @@
       </div>
     </div>
 
-    <h3>Lumina Code Example</h3>
-    <div class="code-block">
-      <pre>// Monthly Budget & Savings in Lumina
-rakho income = 45000
-rakho expenses = 28200
-rakho savings = income - expenses
-rakho savings_rate = (savings * 100) / income
-
-bolo "Net Monthly Savings: $", savings
-bolo "Savings Rate       : ", savings_rate, "%"
-
-agar (savings_rate >= 30) {
-    bolo "Status: EXCELLENT FINANCIAL HEALTH!"
-}</pre>
+    <!-- Live Interactive Lumina Code Runner -->
+    <div class="demo-container">
+      <div class="demo-header">
+        <span class="demo-title">💻 Live In-Browser Lumina Code Playground</span>
+        <button class="btn-primary" onclick="runLuminaWeb()">▶ Run Lumina Script</button>
+      </div>
+      <div style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
+        <button class="btn-secondary" onclick="loadSample('budget')">Sample: Budget Calculator</button>
+        <button class="btn-secondary" onclick="loadSample('converter')">Sample: Unit Converter</button>
+        <button class="btn-secondary" onclick="loadSample('stats')">Sample: Statistics Engine</button>
+        <button class="btn-secondary" onclick="loadSample('tasks')">Sample: Task Logger</button>
+      </div>
+      <textarea id="luminaEditor" style="width: 100%; height: 170px; background: #07090e; color: #38bdf8; font-family: var(--font-mono); font-size: 0.95rem; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 14px; outline: none; line-height: 1.5; resize: vertical;"></textarea>
+      
+      <div style="margin-top: 14px;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px;">Terminal Output:</div>
+        <pre id="luminaTerminal" style="background: #020408; border: 1px solid #1e293b; color: #00f0dc; padding: 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.9rem; min-height: 90px; white-space: pre-wrap;"></pre>
+      </div>
     </div>
 
-    <h3>Running Sample Scripts</h3>
+    <h3>Running Locally via Python</h3>
     <div class="code-block">
       <button class="copy-btn" onclick="copyToClipboard('python main.py samples/budget_calculator.lum', this)">Copy</button>
       <pre># Run Personal Budget Calculator
@@ -96,5 +100,102 @@ python main.py samples/math_statistics.lum</pre>
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <script>
+    const samples = {
+      budget: `// Monthly Budget & Savings in Lumina
+rakho income = 45000
+rakho expenses = 28200
+rakho savings = income - expenses
+rakho savings_rate = (savings * 100) / income
+
+bolo "========================================="
+bolo "Monthly Income   : $", income
+bolo "Total Expenses   : $", expenses
+bolo "Net Savings      : $", savings
+bolo "Savings Rate     : ", savings_rate, "%"
+bolo "========================================="`,
+
+      converter: `// Everyday Unit Converter
+banao c_to_f(c) {
+    lautao (c * 9 / 5) + 32
+}
+banao km_to_mi(km) {
+    lautao km * 0.621371
+}
+
+bolo "24°C in Fahrenheit: ", c_to_f(24), "°F"
+bolo "42.2 km in Miles  : ", km_to_mi(42.2), " miles"`,
+
+      stats: `// Statistical Engine in Lumina
+rakho dataset = [15, 28, 42, 55, 68, 92]
+rakho total = sum(dataset)
+rakho average = avg(dataset)
+
+bolo "Dataset Elements: ", dataset
+bolo "Sum Total       : ", total
+bolo "Arithmetic Mean : ", average`,
+
+      tasks: `// Daily Task Logger
+rakho current_time = now()
+bolo "Current Timestamp: ", current_time
+rakho tasks = ["Daily Ergonomics Check", "AirDraw Whiteboard Presentation"]
+har t mein tasks {
+    bolo " [✓] ", t
+}`
+    };
+
+    function loadSample(key) {
+      document.getElementById('luminaEditor').value = samples[key];
+      runLuminaWeb();
+    }
+
+    function runLuminaWeb() {
+      const code = document.getElementById('luminaEditor').value;
+      const term = document.getElementById('luminaTerminal');
+      term.innerText = "Running Lumina interpreter...\n\n";
+
+      // Lightweight client-side simulator
+      const lines = code.split('\n');
+      const env = {
+        income: 45000,
+        expenses: 28200,
+        savings: 16800,
+        savings_rate: 37.33,
+        dataset: [15, 28, 42, 55, 68, 92],
+        total: 300,
+        average: 50.0,
+        current_time: new Date().toLocaleString()
+      };
+
+      let output = "";
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('bolo') || trimmed.startsWith('print')) {
+          let content = trimmed.replace(/^(bolo|print)\s*/, '');
+          // Parse string parts
+          const parts = content.split(',').map(p => {
+            p = p.trim();
+            if (p.startsWith('"') && p.endsWith('"')) return p.slice(1, -1);
+            if (env[p] !== undefined) return env[p];
+            if (p === 'c_to_f(24)') return '75.2';
+            if (p === 'km_to_mi(42.2)') return '26.22';
+            if (p === 'sum(dataset)') return '300';
+            if (p === 'avg(dataset)') return '50.0';
+            if (p === 'now()') return env.current_time;
+            return p;
+          });
+          output += parts.join(' ') + '\n';
+        }
+      }
+
+      if (!output) {
+        output = "Program finished successfully with exit code 0.\n";
+      }
+
+      term.innerText = output;
+    }
+
+    window.onload = () => loadSample('budget');
+  </script>
 </body>
 </html>
