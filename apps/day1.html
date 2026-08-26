@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 1: Infinite Wallpaper Studio | Project Showcase</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <span>⚡ 30-Day App Suite</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="../index.html">← Back to All Apps</a></li>
+          <li><a href="https://github.com/AryanXCode646/7_days_cool_-projects" target="_blank" class="github-btn">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="detail-container">
+    <a href="../index.html" class="back-link">← Return to Application Suite</a>
+
+    <div class="detail-header">
+      <span class="day-badge">DAY 01</span>
+      <h1>Infinite Wallpaper Studio & Focus Manager</h1>
+      <p>Generates infinite geometric, wave, noise, and gradient desktop artwork with direct Windows wallpaper setting integration, resolution presets, and daily motivational focus quotes.</p>
+    </div>
+
+    <!-- Live Interactive Wallpaper Generator -->
+    <div class="demo-container">
+      <div class="demo-header">
+        <span class="demo-title">🎨 Live Interactive Canvas Art Generator</span>
+        <button class="btn-primary" onclick="generateWebArt()">Generate New Art</button>
+      </div>
+      <canvas id="wallpaperCanvas" class="demo-canvas"></canvas>
+      <div class="demo-controls">
+        <button class="btn-secondary" onclick="setPalette('cyberpunk')">Cyberpunk</button>
+        <button class="btn-secondary" onclick="setPalette('sunset')">Sunset Gold</button>
+        <button class="btn-secondary" onclick="setPalette('emerald')">Forest Emerald</button>
+        <button class="btn-secondary" onclick="setPalette('ocean')">Deep Ocean</button>
+      </div>
+    </div>
+
+    <h3>Everyday Solutions & Key Features</h3>
+    <div class="feature-grid">
+      <div class="feature-box">
+        <h4>🖥️ 1-Click Windows Wallpaper</h4>
+        <p>Directly updates your Windows desktop background via native <code>SystemParametersInfoW</code> without opening settings.</p>
+      </div>
+      <div class="feature-box">
+        <h4>📐 4K / 2K Ultra-HD Scaling</h4>
+        <p>Switch between 1080p, 1440p 2K, and 4K UHD resolutions to export ultra-sharp wallpapers for any monitor.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🕒 Focus Clock & Motivational Quotes</h4>
+        <p>Integrated HUD displaying current local time, calendar date, and curated deep-work affirmations.</p>
+      </div>
+    </div>
+
+    <h3>Keyboard Shortcuts</h3>
+    <table class="shortcut-table">
+      <thead>
+        <tr><th>Key</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="key-kbd">W</span></td><td>Set current generated art as active <strong>Windows Desktop Wallpaper</strong></td></tr>
+        <tr><td><span class="key-kbd">T</span></td><td>Cycle color themes (Cyberpunk, Sunset, Emerald, Ocean, Nordic Ice)</td></tr>
+        <tr><td><span class="key-kbd">C</span></td><td>Toggle live desktop Clock & Daily Focus Quote overlay</td></tr>
+        <tr><td><span class="key-kbd">R</span></td><td>Cycle target resolutions (1080p, 1440p 2K, 4K UHD)</td></tr>
+        <tr><td><span class="key-kbd">S</span></td><td>Save high-resolution PNG to <code>saved_wallpapers/</code></td></tr>
+        <tr><td><span class="key-kbd">P</span></td><td>Pause / Resume auto-generation interval</td></tr>
+        <tr><td><span class="key-kbd">Space</span></td><td>Generate a new design immediately</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Running Locally</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('python Day_1/infinte_wallpapers.py', this)">Copy</button>
+      <pre>python Day_1/infinte_wallpapers.py</pre>
+    </div>
+  </main>
+
+  <footer>
+    <p>30 Days Project Suite • Open Source on GitHub</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    let currentPalette = 'cyberpunk';
+    const palettes = {
+      cyberpunk: ['#0f051d', '#00f0dc', '#f43f5e', '#a855f7'],
+      sunset: ['#1c0c05', '#f59e0b', '#ef4444', '#ffd700'],
+      emerald: ['#03170e', '#10b981', '#34d399', '#059669'],
+      ocean: ['#05131f', '#0ea5e9', '#38bdf8', '#0284c7']
+    };
+
+    function setPalette(name) {
+      currentPalette = name;
+      generateWebArt();
+    }
+
+    function generateWebArt() {
+      const canvas = document.getElementById('wallpaperCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+      const colors = palettes[currentPalette];
+
+      ctx.fillStyle = colors[0];
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < 30; i++) {
+        ctx.strokeStyle = colors[1 + Math.floor(Math.random() * (colors.length - 1))];
+        ctx.lineWidth = 1 + Math.random() * 3;
+        ctx.beginPath();
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+        ctx.stroke();
+      }
+
+      for (let i = 0; i < 8; i++) {
+        ctx.fillStyle = colors[1 + Math.floor(Math.random() * (colors.length - 1))] + '33';
+        ctx.beginPath();
+        ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 20 + Math.random() * 80, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    window.onload = generateWebArt;
+  </script>
+</body>
+</html>

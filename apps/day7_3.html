@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 7_3: Typing Analyzer Pro | Project Showcase</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><span>⚡ 30-Day App Suite</span></a>
+      <nav>
+        <ul>
+          <li><a href="../index.html">← Back to All Apps</a></li>
+          <li><a href="https://github.com/AryanXCode646/7_days_cool_-projects" target="_blank" class="github-btn">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="detail-container">
+    <a href="../index.html" class="back-link">← Return to Application Suite</a>
+
+    <div class="detail-header">
+      <span class="day-badge">DAY 07_3</span>
+      <h1>Typing Analyzer Pro — Developer & Productivity Edition</h1>
+      <p>A desktop typing mastery application with Developer Code Syntax practice (Python, JS, SQL, Docker), Custom Study Text paste mode, Weak-Key Drills, mechanical key click audio, and session speed velocity plots.</p>
+    </div>
+
+    <!-- Live Interactive Browser Typing Test -->
+    <div class="demo-container">
+      <div class="demo-header">
+        <span class="demo-title">⌨️ Live Browser Developer Typing Drill</span>
+        <span id="demoWpm" style="font-weight: 700; color: #00f0dc;">0 WPM</span>
+      </div>
+      <div id="targetText" style="font-family: var(--font-mono); font-size: 1.15rem; background: #0b0f19; padding: 20px; border-radius: 10px; line-height: 1.6; margin-bottom: 16px;">
+        const calculateAverage = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;
+      </div>
+      <input type="text" id="typeInput" placeholder="Type the code above..." style="width: 100%; padding: 14px 18px; font-family: var(--font-mono); font-size: 1.1rem; background: #131a29; border: 1px solid #00f0dc; border-radius: 10px; color: #fff; outline: none;" oninput="handleWebType(this)">
+    </div>
+
+    <h3>Everyday Solutions & Key Features</h3>
+    <div class="feature-grid">
+      <div class="feature-box">
+        <h4>💻 Developer Code Syntax Practice</h4>
+        <p>Drill typing brackets (<code>{}[]()</code>), arrow functions (<code>=&gt;</code>), and SQL syntax to build programming muscle memory.</p>
+      </div>
+      <div class="feature-box">
+        <h4>📝 Custom Study Notes Paste Mode</h4>
+        <p>Paste any study notes, foreign language vocabulary, or article to practice typing what you need to learn.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🎯 Weak-Key Drill Generator</h4>
+        <p>Automatically isolates your most frequently missed keys and generates targeted drills to eliminate typos.</p>
+      </div>
+      <div class="feature-box">
+        <h4>📈 Velocity Analytics & History</h4>
+        <p>Plots WPM speed velocity curves and logs your typing progress to <code>typing_history.json</code>.</p>
+      </div>
+    </div>
+
+    <h3>Keyboard Controls</h3>
+    <table class="shortcut-table">
+      <thead>
+        <tr><th>Key / Control</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="key-kbd">Tab</span></td><td>Instantly reset and generate a new typing test prompt</td></tr>
+        <tr><td><span class="key-kbd">Mode Dropdown</span></td><td>Switch between Code Syntax, Wisdom Quotes, Custom Notes, and Weak-Key Drills</td></tr>
+        <tr><td><span class="key-kbd">Word Selector</span></td><td>Adjust test length (15, 25, 50, 100 words)</td></tr>
+        <tr><td><span class="key-kbd">Paste Study Text</span></td><td>Opens dialog to input any custom study notes or text</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Running Locally</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('python Day_7_3/main.py', this)">Copy</button>
+      <pre>python Day_7_3/main.py</pre>
+    </div>
+  </main>
+
+  <footer>
+    <p>30 Days Project Suite • Open Source on GitHub</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    let startTime = null;
+    const target = "const calculateAverage = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;";
+
+    function handleWebType(input) {
+      if (!startTime && input.value.length > 0) startTime = Date.now();
+      const val = input.value;
+      const targetDiv = document.getElementById('targetText');
+      let html = '';
+
+      for (let i = 0; i < target.length; i++) {
+        if (i < val.length) {
+          const color = val[i] === target[i] ? '#00f0dc' : '#f43f5e';
+          html += `<span style="color: ${color}">${target[i]}</span>`;
+        } else {
+          html += `<span style="color: #64748b">${target[i]}</span>`;
+        }
+      }
+      targetDiv.innerHTML = html;
+
+      if (startTime) {
+        const elapsedMin = (Date.now() - startTime) / 60000;
+        const words = (val.length / 5);
+        const wpm = Math.round(words / Math.max(0.01, elapsedMin));
+        document.getElementById('demoWpm').innerText = `${wpm} WPM`;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 3: Swarm Ecosystem & Genetic Simulation | Project Showcase</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><span>⚡ 30-Day App Suite</span></a>
+      <nav>
+        <ul>
+          <li><a href="../index.html">← Back to All Apps</a></li>
+          <li><a href="https://github.com/AryanXCode646/7_days_cool_-projects" target="_blank" class="github-btn">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="detail-container">
+    <a href="../index.html" class="back-link">← Return to Application Suite</a>
+
+    <div class="detail-header">
+      <span class="day-badge">DAY 03</span>
+      <h1>Swarm Ecosystem & Genetic Problem Solver</h1>
+      <p>Interactive biological ecosystem simulator with genetic adaptation, obstacle painting, food spawning, disease contagion modeling, and telemetry data export.</p>
+    </div>
+
+    <!-- Live Interactive Swarm Demo -->
+    <div class="demo-container">
+      <div class="demo-header">
+        <span class="demo-title">🐜 Live Swarm Simulation (Click canvas to spawn food!)</span>
+      </div>
+      <canvas id="swarmCanvas" class="demo-canvas"></canvas>
+    </div>
+
+    <h3>Everyday Solutions & Features</h3>
+    <div class="feature-grid">
+      <div class="feature-box">
+        <h4>🧱 Interactive Obstacle Maze Painting</h4>
+        <p>Right-click and drag anywhere on the canvas to paint walls, testing how autonomous agents solve pathfinding dilemmas.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🧬 Genetic Evolution & Lineage HUD</h4>
+        <p>Agents pass down traits (speed, sensory radius, metabolic efficiency, immunity) across generations in real time.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🦠 Contagion & Herd Immunity</h4>
+        <p>Press <code>E</code> to introduce an epidemiological contagion and watch biological resistance develop through natural selection.</p>
+      </div>
+      <div class="feature-box">
+        <h4>📊 CSV Telemetry Exporter</h4>
+        <p>Press <code>X</code> to export agent population size, mean speed, average age, and mutation rate to <code>swarm_telemetry.csv</code>.</p>
+      </div>
+    </div>
+
+    <h3>Controls & Mouse Commands</h3>
+    <table class="shortcut-table">
+      <thead>
+        <tr><th>Input</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="key-kbd">Left Click</span></td><td>Place fresh food caches for the swarm</td></tr>
+        <tr><td><span class="key-kbd">Right Click + Drag</span></td><td>Draw obstacle / maze walls to test agent navigation</td></tr>
+        <tr><td><span class="key-kbd">Middle Click</span></td><td>Spawn new agents with randomized genomes</td></tr>
+        <tr><td><span class="key-kbd">E</span></td><td>Toggle Epidemic Contagion & Antibody Simulation</td></tr>
+        <tr><td><span class="key-kbd">C</span></td><td>Clear all drawn obstacle walls</td></tr>
+        <tr><td><span class="key-kbd">X</span></td><td>Export population metrics to CSV file</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Running Locally</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('python Day_3/Artificial_Life_Simulation.py', this)">Copy</button>
+      <pre>python Day_3/Artificial_Life_Simulation.py</pre>
+    </div>
+  </main>
+
+  <footer>
+    <p>30 Days Project Suite • Open Source on GitHub</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    window.onload = () => new WebSwarmDemo('swarmCanvas');
+  </script>
+</body>
+</html>

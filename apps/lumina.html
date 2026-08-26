@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumina Programming Language | Project Showcase</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><span>⚡ 30-Day App Suite</span></a>
+      <nav>
+        <ul>
+          <li><a href="../index.html">← Back to All Apps</a></li>
+          <li><a href="https://github.com/AryanXCode646/7_days_cool_-projects" target="_blank" class="github-btn">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="detail-container">
+    <a href="../index.html" class="back-link">← Return to Application Suite</a>
+
+    <div class="detail-header">
+      <span class="day-badge">LUMINA ENGINE</span>
+      <h1>Lumina Programming Language & Automation</h1>
+      <p>A bilingual, lightweight programming language designed for everyday calculations, file automation, and productivity scripting with native standard library builtins.</p>
+    </div>
+
+    <h3>Everyday Solutions & Key Features</h3>
+    <div class="feature-grid">
+      <div class="feature-box">
+        <h4>💰 Budget & Expense Calculation</h4>
+        <p>Run <code>samples/budget_calculator.lum</code> to calculate net savings, percentage allocations, and health targets.</p>
+      </div>
+      <div class="feature-box">
+        <h4>📏 Universal Unit Converter</h4>
+        <p>Run <code>samples/unit_converter.lum</code> for instant temperature, distance, and weight conversions.</p>
+      </div>
+      <div class="feature-box">
+        <h4>📝 Persistent Daily Task Logging</h4>
+        <p>Run <code>samples/todo_tracker.lum</code> to sync timestamps and active task items directly into disk text logs.</p>
+      </div>
+      <div class="feature-box">
+        <h4>📊 Statistical Data Engine</h4>
+        <p>Run <code>samples/math_statistics.lum</code> for list averages, min/max metrics, and Euclidean vector math.</p>
+      </div>
+    </div>
+
+    <h3>Lumina Code Example</h3>
+    <div class="code-block">
+      <pre>// Monthly Budget & Savings in Lumina
+rakho income = 45000
+rakho expenses = 28200
+rakho savings = income - expenses
+rakho savings_rate = (savings * 100) / income
+
+bolo "Net Monthly Savings: $", savings
+bolo "Savings Rate       : ", savings_rate, "%"
+
+agar (savings_rate >= 30) {
+    bolo "Status: EXCELLENT FINANCIAL HEALTH!"
+}</pre>
+    </div>
+
+    <h3>Running Sample Scripts</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('python main.py samples/budget_calculator.lum', this)">Copy</button>
+      <pre># Run Personal Budget Calculator
+python main.py samples/budget_calculator.lum
+
+# Run Unit Converter
+python main.py samples/unit_converter.lum
+
+# Run Daily Task Logger
+python main.py samples/todo_tracker.lum
+
+# Run Math Statistics
+python main.py samples/math_statistics.lum</pre>
+    </div>
+  </main>
+
+  <footer>
+    <p>30 Days Project Suite • Open Source on GitHub</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

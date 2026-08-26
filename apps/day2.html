@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 2: Fractal Tree Studio & Mindful Guide | Project Showcase</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><span>⚡ 30-Day App Suite</span></a>
+      <nav>
+        <ul>
+          <li><a href="../index.html">← Back to All Apps</a></li>
+          <li><a href="https://github.com/AryanXCode646/7_days_cool_-projects" target="_blank" class="github-btn">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="detail-container">
+    <a href="../index.html" class="back-link">← Return to Application Suite</a>
+
+    <div class="detail-header">
+      <span class="day-badge">DAY 02</span>
+      <h1>Fractal Tree Studio & Mindful Breathing Guide</h1>
+      <p>Generative branching mathematics coupled with practical utility: Disk Directory Tree Visualizer and Clinical 4-7-8 Stress-Relief Breathing Pacer for desk workers.</p>
+    </div>
+
+    <!-- Live Interactive Tree Generator & Breathing Demo -->
+    <div class="demo-container">
+      <div class="demo-header">
+        <span class="demo-title">🌿 Live Interactive Fractal Tree Grower</span>
+        <button class="btn-primary" onclick="growTree()">Regrow Tree</button>
+      </div>
+      <canvas id="treeCanvas" class="demo-canvas"></canvas>
+    </div>
+
+    <h3>Everyday Solutions & Features</h3>
+    <div class="feature-grid">
+      <div class="feature-box">
+        <h4>📁 Disk Directory Tree Visualizer</h4>
+        <p>Press <code>F</code> to scan your local project and render directories as branches, letting you visualize project depth organically.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🧘 4-7-8 Mindful Breathing Pacer</h4>
+        <p>Press <code>B</code> to launch a rhythmic guide: Inhale 4s, Hold 7s, Exhale 8s to calm the nervous system during intense work sessions.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🍁 Seasonal Color Themes</h4>
+        <p>Switch between Spring Blossom, Summer Green, Autumn Amber, and Winter Frost color themes.</p>
+      </div>
+    </div>
+
+    <h3>Keyboard Shortcuts</h3>
+    <table class="shortcut-table">
+      <thead>
+        <tr><th>Key</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="key-kbd">F</span></td><td>Toggle <strong>Project Directory Tree Scanner</strong> (scans disk structure)</td></tr>
+        <tr><td><span class="key-kbd">B</span></td><td>Toggle <strong>4-7-8 Mindful Breathing Pacer</strong> with expanding guide rings</td></tr>
+        <tr><td><span class="key-kbd">T</span></td><td>Cycle seasonal palettes (Spring, Summer, Autumn, Winter)</td></tr>
+        <tr><td><span class="key-kbd">S</span> / <span class="key-kbd">E</span></td><td>Export high-resolution screenshot to disk</td></tr>
+        <tr><td><span class="key-kbd">Space</span></td><td>Generate a new fractal tree iteration</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Running Locally</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('python Day_2/faractor_tree_generator.py', this)">Copy</button>
+      <pre>python Day_2/faractor_tree_generator.py</pre>
+    </div>
+  </main>
+
+  <footer>
+    <p>30 Days Project Suite • Open Source on GitHub</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    function growTree() {
+      const canvas = document.getElementById('treeCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      function drawBranch(startX, startY, len, angle, depth) {
+        if (depth === 0) return;
+        const endX = startX + len * Math.sin(angle);
+        const endY = startY - len * Math.cos(angle);
+
+        ctx.strokeStyle = depth > 2 ? '#34d399' : '#10b981';
+        ctx.lineWidth = depth * 0.9;
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+
+        drawBranch(endX, endY, len * 0.75, angle + 0.35 + (Math.random() - 0.5) * 0.1, depth - 1);
+        drawBranch(endX, endY, len * 0.75, angle - 0.35 + (Math.random() - 0.5) * 0.1, depth - 1);
+      }
+
+      drawBranch(canvas.width / 2, canvas.height - 20, 85, 0, 9);
+    }
+    window.onload = growTree;
+  </script>
+</body>
+</html>

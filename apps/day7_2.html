@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 7_2: Virtual Piano & Music Studio | Project Showcase</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo"><span>⚡ 30-Day App Suite</span></a>
+      <nav>
+        <ul>
+          <li><a href="../index.html">← Back to All Apps</a></li>
+          <li><a href="https://github.com/AryanXCode646/7_days_cool_-projects" target="_blank" class="github-btn">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="detail-container">
+    <a href="../index.html" class="back-link">← Return to Application Suite</a>
+
+    <div class="detail-header">
+      <span class="day-badge">DAY 07_2</span>
+      <h1>Virtual Piano & Music Learning Studio</h1>
+      <p>A full 12-tone chromatic software synthesizer with real-time chord detection HUD, practice metronome with adjustable BPM, and multi-track WAV audio export.</p>
+    </div>
+
+    <!-- Live Interactive Playable Web Piano -->
+    <div class="demo-container">
+      <div class="demo-header">
+        <span class="demo-title">🎹 Live Web Audio Piano (Press A, S, D, F, G, H, J, K on your keyboard!)</span>
+      </div>
+      <canvas id="pianoCanvas" class="demo-canvas" style="height: 200px;"></canvas>
+    </div>
+
+    <h3>Everyday Solutions & Key Features</h3>
+    <div class="feature-grid">
+      <div class="feature-box">
+        <h4>🎼 Real-Time Chord Detection</h4>
+        <p>Press <code>C</code> to toggle the chord analyzer that recognizes Major, Minor, and Seventh chords when played together.</p>
+      </div>
+      <div class="feature-box">
+        <h4>⏱️ Practice Metronome</h4>
+        <p>Press <code>M</code> to toggle a metronome and adjust tempo with <code>[</code> and <code>]</code> from 40 to 240 BPM.</p>
+      </div>
+      <div class="feature-box">
+        <h4>🎙️ Multi-Track WAV Audio Exporter</h4>
+        <p>Record your performances with <code>R</code> and export them into high-quality WAV audio files with <code>S</code>.</p>
+      </div>
+    </div>
+
+    <h3>Keyboard Mapping</h3>
+    <table class="shortcut-table">
+      <thead>
+        <tr><th>Computer Key</th><th>Piano Note</th><th>Key Type</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="key-kbd">A</span>, <span class="key-kbd">S</span>, <span class="key-kbd">D</span>, <span class="key-kbd">F</span>, <span class="key-kbd">G</span>, <span class="key-kbd">H</span>, <span class="key-kbd">J</span>, <span class="key-kbd">K</span></td><td>C, D, E, F, G, A, B, C+1</td><td>White Naturals</td></tr>
+        <tr><td><span class="key-kbd">W</span>, <span class="key-kbd">E</span>, <span class="key-kbd">T</span>, <span class="key-kbd">Y</span>, <span class="key-kbd">U</span>, <span class="key-kbd">O</span></td><td>C#, D#, F#, G#, A#, C#+1</td><td>Black Sharps/Flats</td></tr>
+        <tr><td><span class="key-kbd">M</span></td><td>Toggle Practice Metronome</td><td>Controls</td></tr>
+        <tr><td><span class="key-kbd">[</span> / <span class="key-kbd">]</span></td><td>Decrease / Increase Metronome BPM</td><td>Controls</td></tr>
+        <tr><td><span class="key-kbd">C</span></td><td>Toggle Real-Time Chord Analyzer HUD</td><td>Music Theory</td></tr>
+        <tr><td><span class="key-kbd">R</span> / <span class="key-kbd">P</span></td><td>Start/Stop Recording & Playback</td><td>Studio Tools</td></tr>
+        <tr><td><span class="key-kbd">S</span></td><td>Export Performance to WAV file</td><td>Export</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Running Locally</h3>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyToClipboard('python Day_7_2/piano.py', this)">Copy</button>
+      <pre>python Day_7_2/piano.py</pre>
+    </div>
+  </main>
+
+  <footer>
+    <p>30 Days Project Suite • Open Source on GitHub</p>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    window.onload = () => new WebPianoDemo('pianoCanvas');
+  </script>
+</body>
+</html>
