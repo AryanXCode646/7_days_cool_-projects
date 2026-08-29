@@ -1,18 +1,18 @@
 :root {
-  --bg-primary: #0a0c10;
-  --bg-secondary: #121620;
-  --bg-card: rgba(22, 27, 38, 0.75);
-  --bg-card-hover: rgba(30, 38, 54, 0.9);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --border-glow: rgba(0, 240, 220, 0.4);
-  --text-main: #f0f4fc;
-  --text-muted: #94a3b8;
-  --accent-cyan: #00f0dc;
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: rgba(10, 10, 10, 0.6);
+  --bg-card-hover: rgba(20, 20, 20, 0.8);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(255, 255, 255, 0.15);
+  --text-main: #ededed;
+  --text-muted: #a1a1aa;
+  --accent-cyan: #38bdf8;
   --accent-blue: #3b82f6;
-  --accent-purple: #a855f7;
-  --accent-amber: #f59e0b;
-  --accent-emerald: #10b981;
-  --accent-rose: #f43f5e;
+  --accent-purple: #c084fc;
+  --accent-amber: #fbbf24;
+  --accent-emerald: #34d399;
+  --accent-rose: #fb7185;
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 }
@@ -30,20 +30,20 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(0, 240, 220, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+    radial-gradient(ellipse at 20% 10%, rgba(56, 189, 248, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(192, 132, 252, 0.04) 0%, transparent 50%);
   min-height: 100vh;
 }
 
 a {
   color: var(--accent-cyan);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: color 0.15s ease, opacity 0.15s ease;
 }
 
 a:hover {
   color: #fff;
-  text-shadow: 0 0 10px var(--accent-cyan);
+  opacity: 0.9;
 }
 
 /* ---------------- HEADER & NAV ---------------- */
@@ -123,40 +123,50 @@ nav ul li a:hover, nav ul li a.active {
 .hero {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 70px 24px 50px;
+  padding: 90px 24px 60px;
   text-align: center;
+  animation: heroEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroEntrance {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .badge-tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
-  background: rgba(0, 240, 220, 0.1);
-  border: 1px solid rgba(0, 240, 220, 0.3);
+  padding: 5px 14px;
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.2);
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--accent-cyan);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
 }
 
 .hero h1 {
-  font-size: 3.2rem;
+  font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -1px;
-  margin-bottom: 18px;
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--accent-cyan) 100%);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+  background: linear-gradient(160deg, #ffffff 20%, #a1a1aa 70%, var(--accent-cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
-  max-width: 750px;
-  margin: 0 auto 32px;
+  max-width: 640px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
 }
 
 .hero-actions {
@@ -177,13 +187,13 @@ nav ul li a:hover, nav ul li a.active {
   gap: 8px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 240, 220, 0.3);
+  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
   transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(0, 240, 220, 0.45);
+  box-shadow: 0 6px 28px rgba(56, 189, 248, 0.45);
   color: #000;
 }
 
@@ -233,20 +243,41 @@ nav ul li a:hover, nav ul li a.active {
 .apps-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 28px;
+  gap: 24px;
+}
+
+.apps-grid .app-card {
+  animation: cardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.apps-grid .app-card:nth-child(1) { animation-delay: 0.05s; }
+.apps-grid .app-card:nth-child(2) { animation-delay: 0.10s; }
+.apps-grid .app-card:nth-child(3) { animation-delay: 0.15s; }
+.apps-grid .app-card:nth-child(4) { animation-delay: 0.20s; }
+.apps-grid .app-card:nth-child(5) { animation-delay: 0.25s; }
+.apps-grid .app-card:nth-child(6) { animation-delay: 0.30s; }
+.apps-grid .app-card:nth-child(7) { animation-delay: 0.35s; }
+.apps-grid .app-card:nth-child(8) { animation-delay: 0.40s; }
+.apps-grid .app-card:nth-child(9) { animation-delay: 0.45s; }
+.apps-grid .app-card:nth-child(10){ animation-delay: 0.50s; }
+
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .app-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
   position: relative;
   overflow: hidden;
 }
@@ -257,17 +288,16 @@ nav ul li a:hover, nav ul li a.active {
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--card-accent, var(--accent-cyan)), transparent);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent-cyan)), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .app-card:hover {
-  transform: translateY(-5px);
-  background: var(--bg-card-hover);
-  border-color: var(--card-border-hover, var(--border-glow));
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
 .app-card:hover::before {

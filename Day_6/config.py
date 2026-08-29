@@ -5,10 +5,10 @@ FPS = 60
 # ⚡ Gesture cooldown (reduced for fast response)
 GESTURE_COOLDOWN = 0.12   # 🔥 was 0.4 → now super responsive
 
-# Colors (Neon Theme)
-BG_COLOR = (8, 8, 15)
-NEON_BLUE = (0, 200, 255)
-NEON_PINK = (255, 40, 180)
-NEON_GREEN = (0, 255, 120)
-WHITE = (240, 240, 240)
-RED = (255, 70, 70)
+# Colors (Pro Dark Theme)
+BG_COLOR = (0, 0, 0)
+NEON_BLUE = (56, 189, 248)
+NEON_PINK = (244, 114, 182)
+NEON_GREEN = (52, 211, 153)
+WHITE = (237, 237, 237)
+RED = (251, 113, 133)

@@ -7,15 +7,17 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
 # ---------------- COLORS ----------------
-BG_START = "#0b0b0b"
-BG_END = "#1c1c1c"
-CARD_BG = "#1f1f1f"
-TEXT_MAIN = "#e0e0e0"
-TEXT_ACCENT = "#ffeb3b"
-TEXT_ERROR = "#ff4d4d"
-BUTTON_PRIMARY = "#ff6b6b"
-BUTTON_HOVER = "#ff4d4d"
-SUBTEXT = "#888"
+BG_START = "#000000"
+BG_END = "#0a0a0a"
+CARD_BG = "#111111"
+TEXT_MAIN = "#ededed"
+TEXT_MUTED = "#a1a1aa"
+TEXT_ACCENT = "#38bdf8"
+TEXT_ERROR = "#fb7185"
+BUTTON_PRIMARY = "#2563eb"
+BUTTON_HOVER = "#3b82f6"
+SUBTEXT = "#a1a1aa"
+ACCENT_EMERALD = "#34d399"
 
 # ---------------- DEVELOPER CODE SNIPPETS ----------------
 CODE_SNIPPETS = [
@@ -61,7 +63,7 @@ class TypingApp(QWidget):
             QWidget {{
                 background: qlineargradient(x1:0,y1:0,x2:1,y2:1, stop:0 {BG_START}, stop:1 {BG_END});
                 color: {TEXT_MAIN};
-                font-family: Consolas, 'Courier New', monospace;
+                font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
             }}
         """)
 
@@ -74,7 +76,10 @@ class TypingApp(QWidget):
         self.mode_selector.addItems(["Wisdom & Quotes", "Developer Code Syntax", "Custom Study Notes", "Weak-Key Drill"])
         self.mode_selector.setStyleSheet(f"""
             QComboBox {{
-                background:{CARD_BG}; padding:8px 16px; border-radius:8px; color:{TEXT_MAIN}; font-size:15px; border:1px solid #333;
+                background:{CARD_BG}; padding:8px 16px; border-radius:8px; color:{TEXT_MAIN}; font-size:15px; border:1px solid #222;
+            }}
+            QComboBox::drop-down {{
+                border: none;
             }}
         """)
         self.mode_selector.currentIndexChanged.connect(self.new_sentence)
@@ -85,7 +90,10 @@ class TypingApp(QWidget):
         self.word_selector.setCurrentText("25")
         self.word_selector.setStyleSheet(f"""
             QComboBox {{
-                background:{CARD_BG}; padding:8px 16px; border-radius:8px; color:{TEXT_MAIN}; font-size:15px; border:1px solid #333;
+                background:{CARD_BG}; padding:8px 16px; border-radius:8px; color:{TEXT_MAIN}; font-size:15px; border:1px solid #222;
+            }}
+            QComboBox::drop-down {{
+                border: none;
             }}
         """)
         self.word_selector.currentIndexChanged.connect(self.new_sentence)
@@ -110,8 +118,11 @@ class TypingApp(QWidget):
         top.addStretch()
 
         # Custom text paste button
-        custom_btn = QPushButton("Paste Study Text")
-        custom_btn.setStyleSheet("background:#2a2f3a; padding:6px 14px; border-radius:8px; font-size:14px;")
+        custom_btn = QPushButton("+ Study Text")
+        custom_btn.setStyleSheet(
+            f"background:{CARD_BG}; padding:6px 14px; border-radius:8px; "
+            f"font-size:13px; border:1px solid #222; color:{SUBTEXT};"
+        )
         custom_btn.clicked.connect(self.open_custom_text_dialog)
         top.addWidget(custom_btn)
 
@@ -119,7 +130,9 @@ class TypingApp(QWidget):
 
         # Typing card
         self.card = QFrame()
-        self.card.setStyleSheet(f"QFrame {{ background:{CARD_BG}; border-radius:18px; padding:30px; border:1px solid #2a2a2a; }}")
+        self.card.setStyleSheet(
+            f"QFrame {{ background:{CARD_BG}; border-radius:16px; padding:32px; border:1px solid #1a1a1a; }}"
+        )
         card_layout = QVBoxLayout(self.card)
         card_layout.setSpacing(15)
 
@@ -127,7 +140,7 @@ class TypingApp(QWidget):
         self.text_display = QLabel()
         self.text_display.setWordWrap(True)
         self.text_display.setAlignment(Qt.AlignCenter)
-        self.text_display.setStyleSheet("font-size:26px; line-height:1.6;")
+        self.text_display.setStyleSheet("font-size:24px; line-height:1.8; letter-spacing:0.5px;")
         card_layout.addWidget(self.text_display)
 
         # Hidden input
@@ -141,21 +154,26 @@ class TypingApp(QWidget):
         self.main_layout.addWidget(self.card, stretch=6)
 
         # Stats
-        self.stats = QLabel("0 WPM   0% ACC")
+        self.stats = QLabel("— WPM  ·  —% ACC")
         self.stats.setAlignment(Qt.AlignCenter)
-        self.stats.setStyleSheet(f"color:{SUBTEXT}; font-size:22px; font-weight:bold;")
+        self.stats.setStyleSheet(
+            f"color:{SUBTEXT}; font-size:20px; font-weight:700; letter-spacing:1px; font-family:'JetBrains Mono', monospace;"
+        )
         self.main_layout.addWidget(self.stats)
 
         # Controls Hint
-        hint = QLabel("[TAB] Restart Test  |  [Mode] Switch to Developer Code or Study Text")
+        hint = QLabel("TAB → Restart   ·   Mode → Switch Language   ·   Click to focus")
         hint.setAlignment(Qt.AlignCenter)
-        hint.setStyleSheet("color:#666; font-size:13px;")
+        hint.setStyleSheet(f"color:#444; font-size:12px; letter-spacing:0.5px;")
         self.main_layout.addWidget(hint)
 
         # Restart button
-        self.restart_btn = QPushButton("Restart Test")
+        self.restart_btn = QPushButton("↩  Restart")
         self.restart_btn.setStyleSheet(f"""
-            QPushButton {{ background:{BUTTON_PRIMARY}; color:#111; font-size:16px; font-weight:bold; padding:10px 24px; border-radius:10px; }}
+            QPushButton {{
+                background:{BUTTON_PRIMARY}; color:#fff; font-size:14px; font-weight:700;
+                padding:10px 28px; border-radius:10px; border:none; letter-spacing:0.5px;
+            }}
             QPushButton:hover {{ background:{BUTTON_HOVER}; }}
         """)
         self.restart_btn.clicked.connect(self.start_screen)
@@ -314,46 +332,63 @@ class TypingApp(QWidget):
         weak = getattr(self, "final_weak", [])
         insights = getattr(self, "final_insights", [])
 
+        # WPM hero number
         wpm = QLabel(f"{results['wpm']}")
         wpm.setAlignment(Qt.AlignCenter)
-        wpm.setStyleSheet(f"font-size:90px; color:{TEXT_ACCENT}; font-weight:bold;")
-        label = QLabel("WPM")
+        wpm.setStyleSheet(f"font-size:96px; color:{TEXT_ACCENT}; font-weight:800; letter-spacing:-4px;")
+
+        label = QLabel("WORDS PER MINUTE")
         label.setAlignment(Qt.AlignCenter)
-        label.setStyleSheet(f"color:{SUBTEXT}; font-size:22px;")
+        label.setStyleSheet(f"color:{SUBTEXT}; font-size:13px; letter-spacing:3px; font-weight:600;")
 
         acc = QLabel(f"{results['accuracy']}% Accuracy")
         acc.setAlignment(Qt.AlignCenter)
-        acc.setStyleSheet(f"color:#4caf50; font-size:24px; font-weight:bold;")
+        acc.setStyleSheet(f"color:{ACCENT_EMERALD}; font-size:22px; font-weight:700;")
 
-        weak_text = "\n".join([f"Key '{k}' → {v} errors" for k, v in weak]) or "None! Flawless execution."
-        weak_label = QLabel(f"Weak Key Breakdown:\n{weak_text}")
+        weak_text = "  ·  ".join([f"'{k}' ({v})" for k, v in weak]) or "No weak keys — flawless."
+        weak_label = QLabel(f"Weak Keys: {weak_text}")
         weak_label.setAlignment(Qt.AlignCenter)
-        weak_label.setStyleSheet(f"color:{BUTTON_PRIMARY}; font-size:16px;")
+        weak_label.setStyleSheet(f"color:{SUBTEXT}; font-size:14px; padding:8px 0;")
 
-        insights_label = QLabel("\n".join(insights))
+        insights_label = QLabel("  ·  ".join(insights))
         insights_label.setAlignment(Qt.AlignCenter)
-        insights_label.setStyleSheet("color:#bbb; font-size:15px;")
+        insights_label.setWordWrap(True)
+        insights_label.setStyleSheet(f"color:{TEXT_MUTED}; font-size:14px; line-height:1.6; padding:0 20px;")
 
-        fig, ax = plt.subplots(figsize=(10, 3))
+        # Chart
+        fig, ax = plt.subplots(figsize=(10, 2.5))
+        fig.patch.set_facecolor("#000000")
+        ax.set_facecolor("#000000")
         if results.get("timeline"):
-            ax.plot(results["timeline"], color=TEXT_ACCENT, linewidth=2, marker='o', markersize=3)
-        ax.set_title("WPM Speed Velocity Over Session", color=TEXT_ACCENT, fontsize=12)
-        ax.set_facecolor(CARD_BG)
-        fig.patch.set_facecolor(BG_START)
-        ax.tick_params(colors=TEXT_MAIN)
+            ax.fill_between(range(len(results["timeline"])), results["timeline"],
+                            color=TEXT_ACCENT, alpha=0.08)
+            ax.plot(results["timeline"], color=TEXT_ACCENT, linewidth=1.5,
+                    marker='o', markersize=3, markerfacecolor=TEXT_ACCENT)
+        ax.spines[:].set_visible(False)
+        ax.set_title("WPM Velocity", color=SUBTEXT, fontsize=10, loc='left',
+                     fontfamily='monospace', pad=10)
+        ax.tick_params(colors=SUBTEXT, labelsize=8)
+        ax.grid(axis='y', color='#1a1a1a', linewidth=1)
         canvas = FigureCanvas(fig)
 
+        self.main_layout.addSpacing(10)
         self.main_layout.addWidget(wpm)
         self.main_layout.addWidget(label)
+        self.main_layout.addSpacing(6)
         self.main_layout.addWidget(acc)
-        self.main_layout.addSpacing(10)
+        self.main_layout.addSpacing(4)
         self.main_layout.addWidget(weak_label)
         self.main_layout.addWidget(insights_label)
         self.main_layout.addWidget(canvas)
+        self.main_layout.addSpacing(8)
 
-        restart = QPushButton("Start Next Practice Session")
+        restart = QPushButton("↩  New Session")
         restart.setStyleSheet(f"""
-            QPushButton {{ background:{BUTTON_PRIMARY}; padding:12px 28px; border-radius:10px; font-size:16px; font-weight:bold; }}
+            QPushButton {{
+                background: {BUTTON_PRIMARY}; color:#fff; padding:12px 32px;
+                border-radius:10px; font-size:15px; font-weight:700;
+                border: none; letter-spacing:0.5px;
+            }}
             QPushButton:hover {{ background:{BUTTON_HOVER}; }}
         """)
         restart.clicked.connect(self.start_screen)
